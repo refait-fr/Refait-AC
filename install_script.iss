@@ -1,10 +1,10 @@
 [Setup]
 AppName=Refait Autoclicker
-AppVersion=1.0
+AppVersion=1.0.1
 DefaultDirName={autopf}\Refait Autoclicker
 DefaultGroupName=Refait
 OutputDir=.\Installer
-OutputBaseFilename=Install_RefaitAC_v1.0
+OutputBaseFilename=Install_RefaitAC_v1.0.1
 Compression=lzma2
 SolidCompression=yes
 SetupIconFile=Refait.ico

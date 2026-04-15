@@ -32,7 +32,7 @@ class Api(QObject):
 
     @Slot()
     def check_updates(self):
-        CURRENT_VERSION = "v1.0.0"
+        CURRENT_VERSION = "v1.0.1"
         
         def fetch():
             import urllib.request
