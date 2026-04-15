@@ -57,8 +57,8 @@ uv run python -m refait_ac
 Développé au travers du projet YouTube de la chaîne Refait.
 N'hésitez pas à interagir, ouvrir des issues, ou proposer des fonctionnalités via des Pull Requests !
 
-- [🔗 Notre Chaîne YouTube](#)
-- [💬 Serveur Discord](#)
+- [🔗 Notre Chaîne YouTube](https://www.youtube.com/@refait-fr)
+- [💻 Notre GitHub](https://github.com/refait-fr)
 
 ---
 <div align="center">

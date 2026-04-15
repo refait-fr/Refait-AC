@@ -6,9 +6,9 @@ from PySide6.QtWebEngineCore import QWebEngineScript
 from PySide6.QtWebChannel import QWebChannel
 from PySide6.QtCore import QFile
 
-from .core.engine import ClickEngine
-from .core.input_manager import HotkeyManager
-from .api import Api
+from refait_ac.core.engine import ClickEngine
+from refait_ac.core.input_manager import HotkeyManager
+from refait_ac.api import Api
 
 def main():
     app = QApplication(sys.argv)

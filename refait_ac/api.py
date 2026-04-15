@@ -32,20 +32,27 @@ class Api(QObject):
 
     @Slot()
     def check_updates(self):
+        CURRENT_VERSION = "v1.0.0"
+        
         def fetch():
             import urllib.request
             import json
             import time
-            time.sleep(1) # simulate delay so the UI animation looks cool
+            time.sleep(1) # Soft delay for smooth animation
             try:
-                req = urllib.request.Request("https://api.github.com/repos/RefaitChannel/Refait-AutoClicker/releases/latest")
+                # Real GitHub API call
+                req = urllib.request.Request("https://api.github.com/repos/refait-fr/Refait-AC/releases/latest")
                 req.add_header('User-Agent', 'Refait-AC-App')
                 with urllib.request.urlopen(req, timeout=3) as response:
                     data = json.loads(response.read().decode())
-                    self.updateAvailable.emit(data.get("tag_name", "v1.0.0"), data.get("html_url", ""))
+                    latest_version = data.get("tag_name", "v1.0.0")
+                    html_url = data.get("html_url", "https://github.com/refait-fr/Refait-AC/releases")
+                    
+                    # Determine if it's an update (simple string check or semantic)
+                    if latest_version != CURRENT_VERSION and "v" in latest_version:
+                        self.updateAvailable.emit(latest_version, html_url)
             except Exception:
-                # Mock update for demonstration since repo doesn't exist yet!
-                self.updateAvailable.emit("v1.2.0-Alpha", "https://github.com/RefaitChannel")
+                pass # Silently fail if no internet or no releases exist yet
                 
         import threading
         threading.Thread(target=fetch, daemon=True).start()
