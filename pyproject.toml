@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "refait-ac"
+version = "0.1.0"
+description = "Refait AC - AutoClicker desktop reconstruit en mieux."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "PySide6>=6.8.0,<7",
+    "keyboard>=0.13.5,<0.14",
+    "pyinstaller>=6.19.0",
+    "pynput>=1.7.7,<2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3,<9",
+]
+build = [
+    "pyinstaller>=6.11,<7",
+]
+
+[project.scripts]
+refait-ac = "refait_ac.__main__:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
