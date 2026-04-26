@@ -1,66 +1,102 @@
-<div align="center">
-  <img src="Refait.ico" width="100" />
-  <h1>Refait AutoClicker</h1>
-  <p><b>Le seul AutoClicker pensé pour YouTube, premium et minimaliste.</b></p>
-</div>
+# Refait AC
 
-<br/>
+Refait AC est un autoclicker Windows léger, reconstruit en **Tauri 2 + React + TypeScript + Rust**.
 
-Refait AutoClicker est un logiciel open-source hybride Python/React conçu pour offrir une expérience esthétique inégalée (type macOS) couplée à un moteur de clic robuste et indétectable.
+Cette version est une **bêta privée**. Elle sert à valider le moteur Rust, les raccourcis globaux, la persistance des profils et le packaging léger avant une éventuelle release publique.
 
-## ✨ Fonctionnalités Principales
+## Points forts
 
-- **Mode Classique & Avancé** : Basculez entre une fenêtre minimaliste volante ou un centre de contrôle complet.
-- **Support Multi-Modes** :
-  - `Spam` (Clics rapides constants, jusqu'à 100+ CPS)
-  - `Hold` (Maintien de la touche enfoncée de façon prolongée)
-  - `Keyboard` (Fonctionne à la fois sur la souris et sur le clavier !)
-- **Profils Sauvegardés** : Sauvegardez jusqu'à 4 profils de jeu indépendants pour switcher en 1 clic.
-- **Raccourcis Globaux** : Assignez la touche de votre choix (Ex: F6) pour piloter l'autoclicker en fond de tâche, même en jouant.
-- **Auto-Updater** : Reste toujours à la page de la dernière version du dépôt.
+- Installeur Windows léger : environ `2,67 Mo`.
+- Application installée : environ `10,57 Mo`.
+- Moteur autoclick en Rust.
+- Raccourci global start/stop : `F6`.
+- Panic stop de sécurité : `Ctrl+Alt+F12`.
+- Profils et paramètres persistants.
+- Bannière de mise à jour basée sur GitHub Releases.
+- Shell Tauri beaucoup plus léger que l'ancienne version PySide6/QtWebEngine.
 
-## 🛠️ Stack Technique
+## Installation bêta
 
-- **Backend** : `Python 3.11` + `PySide6-WebEngine` (Google Chromium interne) pour une exécution garantie et ultra performante.
-- **Frontend** : `React.js` + `Vite` + `TypeScript` + CSS Natif pour les animations de transitions.
-- **Compilation** : `PyInstaller` (pour le binaire logiciel autonome) et `Inno Setup` (pour la conception de l'installeur).
+1. Télécharger l'installeur depuis la page **GitHub Releases** du projet.
+2. Lancer `Refait AC_0.1.0_x64-setup.exe`.
+3. Ouvrir `Refait AC` depuis le menu Démarrer ou le dossier d'installation.
 
-## 🚀 Installation & Utilisation
+## Prérequis
 
-### Pour les Utilisateurs (Téléchargement de l'app)
-1. Rendez-vous dans l'onglet **[Releases](../../releases)** du répertoire GitHub.
-2. Téléchargez l'exécutable `Install_RefaitAC_v1.0.exe`.
-3. Lancez l'installation. L'application apparaîtra sur votre Bureau !
+- Windows 10 ou Windows 11.
+- Microsoft Edge WebView2 Runtime.
 
-### Pour les Développeurs (Mode création)
-Si vous souhaitez cloner et modifier le projet :
+Refait AC utilise WebView2 via Tauri. Le runtime WebView2 n'est pas embarqué afin de garder l'application légère. Sur Windows 10/11, il est généralement déjà installé. Si l'application ne s'ouvre pas, installer le **Microsoft Edge WebView2 Runtime** depuis le site officiel Microsoft.
 
-1. Installez `uv` et Node.js.
-2. Clonez le dépôt :
-```bash
-git clone https://github.com/refait-fr/Refait-AC.git
-cd Refait-AC
+## SmartScreen
+
+La bêta n'est pas signée avec un certificat de code signing. Windows SmartScreen peut donc afficher un avertissement au premier lancement. C'est attendu pour une bêta privée non signée.
+
+## Utilisation
+
+1. Régler les CPS.
+2. Choisir le bouton souris ou le mode souhaité.
+3. Cliquer sur `DÉMARRER`.
+4. Utiliser `F6` pour start/stop global.
+5. Utiliser `Ctrl+Alt+F12` en panic stop si nécessaire.
+
+Conseil de test : commencer avec `1` ou `2` CPS, puis augmenter progressivement. Tester le panic stop avant d'utiliser le mode hold.
+
+La bannière update informe qu'une nouvelle version GitHub existe. Elle ne télécharge ni n'installe automatiquement une mise à jour.
+
+## Données locales
+
+Les paramètres et profils sont stockés ici :
+
+```text
+%APPDATA%\com.refait.ac\
 ```
-3. Compilez le frontend (React) :
-```bash
-cd frontend
+
+Fichiers principaux :
+
+- `settings.json`
+- `profiles.json`
+
+La désinstallation peut conserver ces données utilisateur. Pour repartir d'une configuration propre, fermer l'application puis supprimer manuellement ce dossier.
+
+## Build depuis les sources
+
+Depuis la racine du projet :
+
+```powershell
 npm install
+npm install --prefix frontend
 npm run build
-cd ..
-```
-4. Lancez le client Python :
-```bash
-uv run python -m refait_ac
+npm run lint
+npm exec tauri build
 ```
 
-## 🤝 Contribution & Réseaux
-Développé au travers du projet YouTube de la chaîne Refait.
-N'hésitez pas à interagir, ouvrir des issues, ou proposer des fonctionnalités via des Pull Requests !
+L'installeur généré se trouve ici :
 
-- [🔗 Notre Chaîne YouTube](https://www.youtube.com/@refait-fr)
-- [💻 Notre GitHub](https://github.com/refait-fr)
+```text
+src-tauri/target/release/bundle/nsis/Refait AC_0.1.0_x64-setup.exe
+```
 
----
-<div align="center">
-  <i>Conçu avec exigence.</i>
-</div>
+Validation backend Tauri :
+
+```powershell
+npm run tauri:check
+```
+
+## Limites connues
+
+- Bêta privée uniquement.
+- Application non signée.
+- SmartScreen possible.
+- Pas d'auto-update signé.
+- WebView2 requis et non embarqué.
+- Windows-first pour cette bêta.
+- macOS et Linux ne sont pas validés.
+
+## QA bêta
+
+Voir [BETA_TEST_CHECKLIST.md](BETA_TEST_CHECKLIST.md).
+
+## Changelog
+
+Voir [CHANGELOG.md](CHANGELOG.md).

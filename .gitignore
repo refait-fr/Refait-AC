@@ -28,8 +28,22 @@ node_modules/
 frontend/dist/
 frontend/node_modules/
 
+# Rust/Tauri
+target/
+src-tauri/gen/
+src-tauri/target/
+
 # Installers
 Installer/
+*.exe
+*.msi
+*.msix
+*.appx
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
 
 # OS/IDE
 .VSCode/
